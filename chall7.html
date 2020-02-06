@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+ var student='[{"name":"ibtehal","age":"23","gender":"female","city":"Ibb"},{"name":"ibtehal","age":"23","gender":"female","city":"Taiz"},{"name":"Bushra","age":"24","gender":"female","city":"Sanaa"},{"name":"Ahmed","age":"24","gender":"male","city":"Ibb"},{"name":"Beauti","age":"27","gender":"male","city":"sanaa"},{"name":"ibtehal","age":"23","gender":"female","city":"Ibb"},{"name":"Nuha","age":"24","gender":"female","city":"Taiz"}]';
+
+ var stuArray=JSON.parse(student);
+  
+  
+ // document.write(stuArray.filter(item => item.city === 'Ibb').length);
+ 
+ var Dvalue=[];
+for(var i=0;i< stuArray.length;i++)
+{
+	if (!Dvalue.includes((stuArray[i]["city"])))
+		Dvalue.push(stuArray[i]["city"]);
+}
+  
+ 
+  
+  
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	//theme: "light2", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Cities Charts"
+	},
+	
+	data: [{        
+		type: "column",  
+		showInLegend: true, 
+		//legendMarkerColor: "grey",
+		//legendText: "MMbbl = one million barrels",
+		dataPoints: [  
+			{ y: stuArray.filter(item => item.city === "Ibb").length, label: "Ibb" },
+			{ y: stuArray.filter(item => item.city === "Sanaa").length,  label: "Sanaa" },
+			{ y: stuArray.filter(item => item.city === 'Taiz').length,  label: "Taiz" },
+			/*Dvalue.forEach(function(value){
+			{ y: stuArray.filter(item => item.city === "value").length, label: "value" },
+	 						});*/
+		]
+	}]
+});
+chart.render();
+
+
+
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+	title: {
+		text: "Gender chart"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 140,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: stuArray.filter(item => item.gender === "male").length, label: "male"},
+			{y: stuArray.filter(item => item.gender === "female").length, label: "female"},
+			
+			
+		]
+	}]
+});
+chart2.render();
+}
+
+
+
+  
+</script>
+</head>
+<body>
+<h1>challenge 7</h1>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<br></br>
+<br></br>
+
+<div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+stuArray.forEach(function(value){
+	  document.write(value["name"]+"  "+value["age"]+"  "+value["gender"]+"  "+value["city"]+"<br/>");
+	 
+  });
+</script>
+</body>
+</html>
